@@ -1,0 +1,23 @@
+<form id="report-form">
+    <label>What type of item?</label>
+    <select id="item-type" required>
+        <option value="Clothing & Personal Gear">Clothing & Personal Gear</option>
+        <option value="Documents & Cards">Documents & Cards</option>
+        <option value="Electronics & Gadgets">Electronics & Gadgets</option>
+        <option value="Keys & Accesories">Keys & Accesories</option>
+        <option value="Stationary & Books">Stationary & Books</option>
+        <option value="Wallets & Bags">Wallets & Bags</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <label>Where did you find it? (Room/Location)</label>
+    <input type="text" id="item-location" placeholder="e.g. Room 302" required>
+
+    <label>Time found</label>
+    <input type="time" id="item-time" required>
+
+    <label>Brief Description</label>
+    <input type="text" id="item-desc" placeholder="Describe the item..." required>
+
+    <button type="submit">Submit Report</button>
+</form>

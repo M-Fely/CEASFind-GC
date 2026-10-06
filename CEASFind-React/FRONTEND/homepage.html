@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poetsen+One&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <title>Homepage</title>
+
+    <style>
+      :root {
+        --white: #ffffff;
+        --baby-blue: #a3b8ed;
+        --bg-white: #e3e3e3;
+        --night: #1e3a6a;
+        --onyx: #1b1b1b;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        background-color: var(--white);
+        overflow: hidden;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+      }
+
+      .main-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        font-family: "Roboto Condensed";
+      }
+
+      .side-bar {
+        width: 250px;
+        height: 100vh;
+        background-color: var(--night);
+        color: var(--white);
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .sidebar-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px 10px 10px 20px;
+        width: 100%;
+        flex-shrink: 0;
+      }
+
+      .app-logo {
+        width: 25px;
+        height: auto;
+        transform: scaleX(-1);
+        flex-shrink: 0;
+      }
+
+      h4 {
+        font-size: 15px;
+        font-family: "Poetsen One", sans-serif;
+        color: var(--white);
+        flex-grow: 1;
+        margin-left: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .nav-list {
+        color: var(--white);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex: 1;
+        font-family: "Roboto Condensed";
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 5px 20px;
+        text-decoration: none;
+        color: var(--white);
+        border-radius: 8px;
+        transition: 0.2s;
+        white-space: nowrap;
+        font-size: 13px;
+      }
+
+      .nav-item:hover {
+        background-color: var(--white);
+        color: var(--night);
+      }
+
+      .nav-text { left: 100px; }
+
+      .material-symbols-outlined {
+        min-width: 30px;
+        font-size: 18px;
+      }
+
+      .category-label {
+        font-family: "Poetsen One", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        margin: 5px 0 10px 20px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .content-area {
+        flex: 1;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .top-bar {
+        padding: 20px 10px 10px 10px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        z-index: 110;
+        gap: 20px;
+      }
+
+      .page-title {
+        font-family: "Poetsen One", sans-serif;
+        font-weight: 100;
+        color: var(--night);
+        font-size: 23px;
+        padding-left: 10px;
+      }
+
+      input::placeholder { color: var(--night); opacity: 10; }
+
+      .search-report-group {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-left: auto;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .search-report-group a { text-decoration: none; }
+
+      .search-main {
+        width: 250px;
+        height: 35px;
+        background: var(--white);
+        border-radius: 10px;
+        border: 1px solid var(--bg-white);
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+      }
+
+      .search-main input {
+        border: none;
+        background: transparent;
+        outline: none;
+        flex: 1;
+        color: var(--night);
+      }
+
+      #search-icon { color: var(--night); min-width: 10px; font-size: 20px; }
+
+      .search-icon-btn {
+        background-color: transparent;
+        outline: transparent;
+        border: 0px;
+      }
+
+      .report-wrapper {
+        width: auto;
+        height: 30px;
+        position: relative;
+        flex-shrink: 0;
+        margin-right: 16px;
+        top: -3px;
+      }
+
+      .report-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        background: var(--white);
+        color: var(--night);
+        border: 1px solid var(--bg-white);
+        width: 38px;
+        height: 35px;
+        padding: 0 10px;
+        border-radius: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+      }
+
+      .report-icon { max-width: 18px; margin-right: 5px; }
+
+      .report-text {
+        font-family: "Roboto Condensed", sans-serif;
+        font-weight: 700;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .report-item:hover {
+        width: 113px;
+        background: var(--night);
+        color: var(--white);
+        border: 1px solid var(--bg-white);
+      }
+
+      .report-item:hover .report-text { opacity: 1; transition-delay: 0.1s; }
+
+      .account {
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+        flex-shrink: 0;
+      }
+
+      .logout-btn {
+        font-size: 18px !important;
+        cursor: pointer;
+        margin-right: -15px;
+      }
+
+      .main-scroll-view {
+        flex: 1;
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 10px;
+        overflow-x: hidden;
+        padding: 10px 20px;
+        scrollbar-gutter: stable;
+      }
+
+      .main-scroll-view::-webkit-scrollbar { width: 6px; }
+      .main-scroll-view::-webkit-scrollbar-thumb { background: var(--night); border-radius: 10px; }
+      .main-scroll-view::-webkit-scrollbar-track { background: transparent; }
+
+      .wave-welcome {
+        grid-column: 1 / -1;
+        width: 100%;
+        height: 250px;
+        background: var(--night);
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--bg-white);
+        margin-bottom: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+      }
+
+      .welcome-text {
+        font-family: "Poetsen One", sans-serif;
+        color: var(--white);
+        font-size: 75px;
+        font-weight: 400;
+        text-align: center;
+        z-index: 10;
+        position: relative;
+      }
+
+      .wave-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .wave1,.wave2,.wave3,.wave4,.wave5,.wave6 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+      }
+
+      #feed-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        z-index: 100;
+      }
+
+      .empty-msg {
+        text-align: center;
+        color: var(--onyx);
+        margin-top: 200px;
+        font-style: italic;
+        font-family: "Roboto Condensed";
+      }
+
+      .right-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 100;
+        position: sticky;
+        top: 0;
+        height: fit-content;
+      }
+
+      .preview-card {
+        background: var(--white);
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid var(--bg-white);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+      }
+
+      .preview-card h5 {
+        color: var(--night);
+        margin-bottom: 10px;
+        border-bottom: 1px solid var(--white);
+        padding-bottom: 5px;
+        font-size: 18px;
+      }
+
+      .preview-card img {
+        display: block;
+        width: calc(100% + 38px) !important;
+        margin-left: -19px !important;
+        margin-right: -19px !important;
+        background-color: var(--white) !important;
+      }
+
+      .post-card {
+        background: var(--white);
+        border-radius: 10px;
+        border: 1px solid var(--bg-white);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .post-actions {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0 5px 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        margin-top: 5px;
+      }
+
+      .action-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: none;
+        border: none;
+        color: var(--night);
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 600;
+        transition: 0.2s;
+        padding: 0px 10px;
+        margin-bottom: -5px;
+      }
+
+      .action-btn:hover { color: var(--night); }
+      .action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+      .action-btn.active .material-symbols-outlined {
+        font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+
+      #filter-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 20px 10px 20px;
+        overflow-x: auto;
+        flex-shrink: 0;
+        scrollbar-width: none;
+      }
+
+      #filter-bar::-webkit-scrollbar { display: none; }
+
+      .category-chip {
+        background: var(--white);
+        border: 1px solid var(--bg-white);
+        border-radius: 20px;
+        padding: 5px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: "Roboto Condensed", sans-serif;
+        color: var(--night);
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+      }
+
+      .category-chip:hover, .category-chip.active {
+        background: var(--night);
+        color: var(--white);
+        border-color: var(--night);
+      }
+
+      #search-badge {
+        display: none;
+        align-items: center;
+        background: var(--baby-blue);
+        color: var(--night);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-family: "Roboto Condensed", sans-serif;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .delete-post-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #b91c1c;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 0 8px;
+        font-family: "Roboto Condensed";
+        font-weight: 600;
+        transition: 0.2s;
+      }
+      .delete-post-btn:hover { opacity: 0.7; }
+      .delete-post-btn .material-symbols-outlined { font-size: 16px; }
+
+      /* ── Custom Modal ── */
+      .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 9999; align-items: center; justify-content: center; }
+      .modal-overlay.active { display: flex; }
+      .modal-box { background: var(--white); border-radius: 14px; padding: 28px 32px; max-width: 380px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.25); font-family: "Roboto Condensed", sans-serif; animation: modalPop 0.18s ease; }
+      @keyframes modalPop { from { transform: scale(0.93); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      .modal-icon    { font-size: 36px; margin-bottom: 10px; display: block; text-align: center; }
+      .modal-title   { font-family: "Poetsen One", sans-serif; font-size: 18px; color: var(--night); margin-bottom: 8px; text-align: center; }
+      .modal-message { font-size: 14px; color: #555; text-align: center; line-height: 1.5; margin-bottom: 22px; }
+      .modal-actions { display: flex; gap: 10px; justify-content: center; }
+      .modal-btn { flex: 1; padding: 10px 16px; border-radius: 9px; border: none; font-family: "Roboto Condensed", sans-serif; font-weight: 700; font-size: 14px; cursor: pointer; transition: opacity 0.2s; }
+      .modal-btn:hover { opacity: 0.85; }
+      .modal-btn-cancel  { background: var(--bg-white); color: var(--night); }
+      .modal-btn-confirm { background: var(--night); color: white; }
+      .modal-btn-confirm.danger { background: #b91c1c; }
+      .modal-btn-ok { background: var(--night); color: white; flex: unset; padding: 10px 32px; }
+    </style>
+  </head>
+  <body>
+
+    <!-- Custom Modal -->
+    <div class="modal-overlay" id="appModal">
+      <div class="modal-box">
+        <span class="modal-icon"   id="modalIcon"></span>
+        <div  class="modal-title"   id="modalTitle"></div>
+        <div  class="modal-message" id="modalMessage"></div>
+        <div  class="modal-actions" id="modalActions"></div>
+      </div>
+    </div>
+    <div class="main-container">
+      <div class="side-bar">
+        <div class="sidebar-header">
+          <img class="app-logo" src="/elements/user icon white.png" />
+          <h4>CEAS FIND</h4>
+        </div>
+
+        <nav class="nav-list">
+          <a href="homepage.html" class="nav-item" onclick="filterCategory('all')">
+            <span class="material-symbols-outlined">home</span>
+            <span class="nav-text">Home</span>
+          </a>
+          <a href="saved.html" class="nav-item">
+            <span class="material-symbols-outlined">bookmark</span>
+            <span class="nav-text">Bookmark</span>
+          </a>
+          <a href="history.html" class="nav-item">
+            <span class="material-symbols-outlined">history</span>
+            <span class="nav-text">History</span>
+          </a>
+          <a href="notif.html" class="nav-item">
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="nav-text">Notifications</span>
+          </a>
+
+          <a href="review.html" class="nav-item">
+            <span class="material-symbols-outlined">assignment</span>
+            <span class="nav-text">Review</span>
+          </a>
+
+          <hr style="opacity:0.1; margin:10px 20px; width:190px" />
+          <p class="category-label">Categories</p>
+
+          <a href="#" class="nav-item" onclick="filterCategory('Clothing & Personal Gear')">
+            <span class="material-symbols-outlined">checkroom</span>
+            <span class="nav-text">Clothing & Personal Gear</span>
+          </a>
+          <a href="#" class="nav-item" onclick="filterCategory('Documents & Cards')">
+            <span class="material-symbols-outlined">style</span>
+            <span class="nav-text">Documents & Cards</span>
+          </a>
+          <a href="#" class="nav-item" onclick="filterCategory('Electronics & Gadgets')">
+            <span class="material-symbols-outlined">devices</span>
+            <span class="nav-text">Electronics & Gadgets</span>
+          </a>
+          <a href="#" class="nav-item" onclick="filterCategory('Keys & Accessories')">
+            <span class="material-symbols-outlined">vpn_key</span>
+            <span class="nav-text">Keys & Accessories</span>
+          </a>
+          <a href="#" class="nav-item" onclick="filterCategory('Stationery & Books')">
+            <span class="material-symbols-outlined">menu_book</span>
+            <span class="nav-text">Stationery & Books</span>
+          </a>
+          <a href="#" class="nav-item" onclick="filterCategory('Wallets & Bags')">
+            <span class="material-symbols-outlined">account_balance_wallet</span>
+            <span class="nav-text">Wallets & Bags</span>
+          </a>
+          <a href="#" class="nav-item" onclick="filterCategory('Others')">
+            <span class="material-symbols-outlined">more_horiz</span>
+            <span class="nav-text">Others</span>
+          </a>
+        </nav>
+
+        <div class="account">
+          <span id="sidebar-username"
+            style="font-size:13px; font-weight:bold; color:white;
+                   white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:160px;">
+            Loading…
+          </span>
+          <span class="logout-btn material-symbols-outlined" id="logout-icon">logout</span>
+        </div>
+      </div>
+
+      <div class="content-area">
+        <header class="top-bar">
+          <h1 class="page-title">Home</h1>
+
+          <div class="search-report-group">
+            <div class="search-main">
+              <input class="search-box" type="text" placeholder="Search…" />
+              <button type="submit" class="search-icon-btn">
+                <span class="material-symbols-outlined" id="search-icon">search</span>
+              </button>
+            </div>
+
+            <a href="posting-page.html">
+              <div class="report-wrapper">
+                <div class="report-item">
+                  <span class="material-symbols-outlined">post_add</span>
+                  <h5 class="report-text">Report Item!</h5>
+                </div>
+              </div>
+            </a>
+          </div>
+        </header>
+
+        <div id="filter-bar">
+          <button class="category-chip active" data-cat="all" onclick="filterCategory('all')">All</button>
+          <button class="category-chip" data-cat="Clothing & Personal Gear" onclick="filterCategory('Clothing & Personal Gear')">Clothing</button>
+          <button class="category-chip" data-cat="Documents & Cards" onclick="filterCategory('Documents & Cards')">Documents</button>
+          <button class="category-chip" data-cat="Electronics & Gadgets" onclick="filterCategory('Electronics & Gadgets')">Electronics</button>
+          <button class="category-chip" data-cat="Keys & Accessories" onclick="filterCategory('Keys & Accessories')">Keys</button>
+          <button class="category-chip" data-cat="Stationery & Books" onclick="filterCategory('Stationery & Books')">Stationery</button>
+          <button class="category-chip" data-cat="Wallets & Bags" onclick="filterCategory('Wallets & Bags')">Wallets & Bags</button>
+          <button class="category-chip" data-cat="Others" onclick="filterCategory('Others')">Others</button>
+          <span id="search-badge"></span>
+        </div>
+
+        <div class="main-scroll-view">
+          <div class="wave-welcome">
+            <h1 class="welcome-text">Lost It? Find It.</h1>
+            <div class="wave-container">
+              <img class="wave1" src="/elements/wave 1.png" />
+              <img class="wave2" src="/elements/wave 2.png" />
+              <img class="wave3" src="/elements/wave 3.png" />
+              <img class="wave4" src="/elements/wave 4.png" />
+              <img class="wave5" src="/elements/wave 5.png" />
+              <img class="wave6" src="/elements/wave 6.png" />
+            </div>
+          </div>
+
+          <div id="feed-container">
+            <p class="empty-msg">Loading posts…</p>
+          </div>
+
+          <div class="right-panel">
+            <div class="preview-card">
+              <h5>Notifications</h5>
+              <div id="notif-preview"><p>No new notifications.</p></div>
+            </div>
+            <div class="preview-card">
+            
+            <div class="preview-card">
+              <h5>Review</h5>
+              <div id="review-preview"><p>Nothing to review.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Non-module script: rendering + filtering logic -->
+    <script>
+      // ── appAlert(title, message, icon?) ─────────────────────────────────────
+      // ── appConfirm(title, message, icon?, danger?) → Promise<boolean> ────────
+      function appAlert(title, message, icon = "info") {
+        return new Promise((resolve) => {
+          document.getElementById("modalIcon").textContent    = icon;
+          document.getElementById("modalTitle").textContent   = title;
+          document.getElementById("modalMessage").textContent = message;
+          document.getElementById("modalActions").innerHTML   =
+            `<button class="modal-btn modal-btn-ok" id="modalOk">OK</button>`;
+          document.getElementById("appModal").classList.add("active");
+          document.getElementById("modalOk").onclick = () => {
+            document.getElementById("appModal").classList.remove("active");
+            resolve();
+          };
+        });
+      }
+
+      function appConfirm(title, message, icon = "help", danger = false) {
+        return new Promise((resolve) => {
+          document.getElementById("modalIcon").textContent    = icon;
+          document.getElementById("modalTitle").textContent   = title;
+          document.getElementById("modalMessage").textContent = message;
+          document.getElementById("modalActions").innerHTML   = `
+            <button class="modal-btn modal-btn-cancel"  id="modalCancel">Cancel</button>
+            <button class="modal-btn modal-btn-confirm ${danger ? 'danger' : ''}" id="modalConfirm">Confirm</button>
+          `;
+          document.getElementById("appModal").classList.add("active");
+          document.getElementById("modalCancel").onclick = () => {
+            document.getElementById("appModal").classList.remove("active");
+            resolve(false);
+          };
+          document.getElementById("modalConfirm").onclick = () => {
+            document.getElementById("appModal").classList.remove("active");
+            resolve(true);
+          };
+        });
+      }
+
+      let posts        = [];
+      let currentUser  = null;   // set by the module block below
+      let activeCategory = "all";
+      let searchQuery    = "";
+
+      async function loadPostsFromBackend() {
+        try {
+          const res = await fetch("http://localhost:3000/item");
+          if (!res.ok) throw new Error(await res.text());
+          posts = await res.json();
+          renderFeed();
+        } catch (err) {
+          console.error("Failed to load posts:", err);
+          document.getElementById("feed-container").innerHTML =
+            `<p class="empty-msg">Could not load posts: ${err.message}</p>`;
+        }
+      }
+
+      function updateFilterBar() {
+        const cleanActive = activeCategory.replace(/#/g, "").toLowerCase().trim();
+        document.querySelectorAll(".category-chip").forEach(chip => {
+          const cleanCat = (chip.dataset.cat || "").replace(/#/g, "").toLowerCase().trim();
+          const isAll = chip.dataset.cat === "all";
+          chip.classList.toggle("active",
+            isAll ? activeCategory === "all" : cleanCat === cleanActive
+          );
+        });
+
+        const badge = document.getElementById("search-badge");
+        if (badge) {
+          const q = searchQuery.trim();
+          badge.textContent = q ? `"${q}"` : "";
+          badge.style.display = q ? "inline-flex" : "none";
+        }
+
+        const titleEl = document.querySelector(".page-title");
+        if (titleEl) {
+          if (activeCategory !== "all") {
+            titleEl.innerText = activeCategory.replace(/#/g, "").trim();
+          } else if (searchQuery.trim()) {
+            titleEl.innerText = "Search";
+          } else {
+            titleEl.innerText = "Home";
+          }
+        }
+      }
+
+      window.renderFeed = () => {
+        const feedContainer = document.getElementById("feed-container");
+        if (!feedContainer) return;
+        feedContainer.innerHTML = "";
+
+        const q           = searchQuery.toLowerCase().trim();
+        const cleanActive = activeCategory.replace(/#/g, "").toLowerCase().trim();
+
+        const filtered = posts.filter(post => {
+          const postCat = (post.category || "").replace(/#/g, "").toLowerCase().trim();
+          const passesCat    = activeCategory === "all" || postCat === cleanActive;
+          const passesSearch = !q ||
+            (post.itemName     || "").toLowerCase().includes(q) ||
+            (post.description  || "").toLowerCase().includes(q) ||
+            (post.reporterName || "").toLowerCase().includes(q) ||
+            (post.category     || "").toLowerCase().includes(q);
+          return passesCat && passesSearch;
+        });
+
+        updateFilterBar();
+
+        if (filtered.length === 0) {
+          feedContainer.innerHTML = `<p class="empty-msg">No posts found.</p>`;
+          return;
+        }
+
+        filtered.forEach(post => {
+          const postCard = document.createElement("div");
+          postCard.className = "post-card";
+
+          const rawStatus     = (post.status || "unclaimed").toLowerCase();
+          const displayStatus = rawStatus.charAt(0).toUpperCase() + rawStatus.slice(1);
+
+          // Only "unclaimed" found items can be claimed
+          const isClaimable = rawStatus === "unclaimed" && post.postType !== "lost";
+
+          const statusColors = {
+            unclaimed: "#3f51b5",
+            claimed:   "#0ea5e9",
+            pending:   "#f59e0b",
+            synced:    "#22c55e",
+            searching: "#6b7280",
+          };
+          const sColor = statusColors[rawStatus] || "#8e8e8e";
+
+          const dateStr = post.createdAt?.seconds
+            ? new Date(post.createdAt.seconds * 1000).toLocaleDateString("en-PH", {
+                year: "numeric", month: "short", day: "numeric",
+              })
+            : "";
+
+          // Show delete button only to the post's owner
+          const isOwner = currentUser && currentUser.email === post.reporterEmail;
+          const deleteBtn = isOwner ? `
+            <button class="delete-post-btn" onclick="deletePost('${post.id}', this)">
+              <span class="material-symbols-outlined">delete</span> Delete
+            </button>` : "";
+
+          // Show edit button only to the post's owner
+          const editBtn = isOwner ? `
+            <button class="action-btn" onclick="window.location.href='posting-page.html?edit=${post.id}'">
+              <span class="material-symbols-outlined">edit</span> Edit
+            </button>` : "";
+
+          postCard.innerHTML = `
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+              <div>
+                <strong>${post.reporterName || "Unknown"}</strong>
+                <p style="font-size:13px;">${dateStr} | ${post.category || ""}</p>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                ${deleteBtn}
+                <span id="status-${post.id}"
+                  style="background:${sColor}; color:white; padding:6px 15px;
+                         border-radius:8px; font-size:13px;">
+                  ${displayStatus}
+                </span>
+              </div>
+            </div>
+
+            <div style="margin-bottom:10px;">
+              <p><strong>Item:</strong> ${post.itemName || ""}</p>
+              <p><strong>Type:</strong> ${post.postType === "lost" ? "Lost Item" : "Found Item"}</p>
+              <p>${post.description || ""}</p>
+            </div>
+
+            ${post.img_url
+              ? `<img src="${post.img_url}"
+                   style="width:100%; border-radius:10px; margin-top:10px; object-fit:cover; max-height:300px;" />`
+              : ""}
+
+            <div class="post-actions">
+              ${post.postType === "lost"
+                // ── LOST item: "I Found This" ──
+                // Disabled for the owner (can't find your own lost item)
+                // Disabled if item is no longer being searched
+                ? (() => {
+                    const canReturn = !isOwner && (rawStatus === "searching" || rawStatus === "unclaimed");
+                    return `<button class="action-btn"
+                       style="${canReturn ? 'color:#c0392b; font-weight:700;' : ''}"
+                       onclick="${canReturn ? `window.location.href='return-page.html?postId=${post.id}'` : ''}"
+                       ${!canReturn ? "disabled" : ""}>
+                       <span class="material-symbols-outlined">volunteer_activism</span>
+                       ${isOwner ? "Your Post" : canReturn ? "I Found This!" : displayStatus}
+                     </button>`;
+                  })()
+                // ── FOUND item: Claim button ──
+                // Disabled for the owner (can't claim your own post)
+                : (() => {
+                    const canClaim = !isOwner && isClaimable;
+                    return `<button class="action-btn"
+                       onclick="${canClaim ? `window.location.href='proof-page.html?postId=${post.id}'` : ''}"
+                       ${!canClaim ? "disabled" : ""}>
+                       <span class="material-symbols-outlined">front_hand</span>
+                       ${isOwner ? "Your Post" : canClaim ? "Claim" : displayStatus}
+                     </button>`;
+                  })()
+              }
+
+              <button class="action-btn ${window.savedPostIds?.has(post.id) ? 'active' : ''}"
+                onclick="toggleSave(this, '${post.id}')">
+                <span class="material-symbols-outlined"
+                  style="font-variation-settings: ${window.savedPostIds?.has(post.id)
+                    ? '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24'
+                    : '"FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24'}">bookmark</span>
+                ${window.savedPostIds?.has(post.id) ? 'Saved' : 'Save'}
+              </button>
+
+              ${editBtn}
+
+              <button class="action-btn" onclick="openShare('${post.id}')">
+                <span class="material-symbols-outlined">share</span>
+                Share
+              </button>
+            </div>
+          `;
+
+          feedContainer.appendChild(postCard);
+        });
+      };
+
+      window.filterCategory = (categoryName) => {
+        activeCategory = categoryName;
+        renderFeed();
+      };
+
+      // savedPostIds: set of postIds the current user has bookmarked.
+      // Populated after auth resolves (see module block below).
+      window.savedPostIds = new Set();
+
+      window.toggleSave = async (btn, postId) => {
+        if (!currentUser) { appAlert("Login Required", "Please log in to save items.", "lock"); return; }
+
+        const isSaved = window.savedPostIds.has(postId);
+        // Optimistic UI update
+        btn.classList.toggle("active", !isSaved);
+        const icon = btn.querySelector(".material-symbols-outlined");
+        if (icon) icon.style.fontVariationSettings = isSaved
+          ? '"FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24'
+          : '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24';
+
+        try {
+          if (isSaved) {
+            // Unsave
+            await fetch(
+              `http://localhost:3000/saved/${postId}?uid=${encodeURIComponent(currentUser.uid)}`,
+              { method: "DELETE" }
+            );
+            window.savedPostIds.delete(postId);
+          } else {
+            // Save
+            await fetch("http://localhost:3000/saved", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ uid: currentUser.uid, postId }),
+            });
+            window.savedPostIds.add(postId);
+          }
+        } catch (err) {
+          // Revert optimistic update on failure
+          console.error("Save toggle failed:", err);
+          btn.classList.toggle("active", isSaved);
+          if (icon) icon.style.fontVariationSettings = isSaved
+            ? '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24'
+            : '"FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24';
+        }
+      };
+
+      window.openShare = (id) => {
+        const link = `${window.location.origin}/proof-page.html?postId=${id}`;
+        prompt("Copy link to share this item:", link);
+      };
+
+      // ── Delete a post (owner only) ──────────────────────────────────────────
+      window.deletePost = async (id, btn) => {
+        const confirmed = await appConfirm(
+          "Delete Post",
+          "Are you sure you want to delete this post? This cannot be undone.",
+          "delete_forever",
+          true
+        );
+        if (!confirmed) return;
+        if (!currentUser) { await appAlert("Error", "You must be logged in to delete.", "error"); return; }
+
+        btn.disabled = true;
+        btn.textContent = "Deleting…";
+
+        try {
+          const res = await fetch(
+            `http://localhost:3000/item/${id}?requesterEmail=${encodeURIComponent(currentUser.email)}&requesterUid=${encodeURIComponent(currentUser.uid)}`,
+            { method: "DELETE" }
+          );
+          if (!res.ok) throw new Error(await res.text());
+
+          // Remove from local array and re-render without hitting backend again
+          posts = posts.filter(p => p.id !== id);
+          renderFeed();
+        } catch (err) {
+          await appAlert("Delete Failed", err.message, "error");
+          btn.disabled = false;
+          btn.textContent = "Delete";
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadPostsFromBackend();
+
+        const searchInput = document.querySelector(".search-box");
+        if (searchInput) {
+          searchInput.addEventListener("input", e => {
+            searchQuery = e.target.value;
+            renderFeed();
+          });
+
+          document.querySelector(".search-icon-btn")?.addEventListener("click", () => {
+            searchQuery = searchInput.value;
+            renderFeed();
+          });
+
+          searchInput.addEventListener("keydown", e => {
+            if (e.key === "Escape") {
+              searchQuery = "";
+              searchInput.value = "";
+              renderFeed();
+            }
+          });
+        }
+      });
+    </script>
+
+    <!-- Module script: Firebase Auth for sidebar username + logout -->
+    <script type="module">
+      import { auth } from "./db.js";
+      import { onAuthStateChanged, signOut }
+        from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          window.location.href = "auth.html";
+          return;
+        }
+
+        // Make the logged-in user available to the non-module render script
+        window.currentUser = user;
+        currentUser        = user;
+
+        document.getElementById("sidebar-username").textContent =
+          user.displayName || user.email || "User";
+
+        // Load this user's saved post IDs from Firestore, then re-render
+        // so bookmark buttons show the correct filled/unfilled state
+        try {
+          const res = await fetch(
+            `http://localhost:3000/saved?uid=${encodeURIComponent(user.uid)}`
+          );
+          if (res.ok) {
+            const ids = await res.json(); // string[]
+            window.savedPostIds = new Set(ids);
+          }
+        } catch (e) {
+          console.warn("Could not load saved items:", e);
+        }
+
+        if (typeof renderFeed === "function") renderFeed();
+      });
+
+      document.getElementById("logout-icon").addEventListener("click", async () => {
+        const confirmed = await appConfirm(
+          "Log Out",
+          "Are you sure you want to log out?",
+        );
+        if (!confirmed) return;
+        await signOut(auth);
+        window.location.href = "auth.html";
+      });
+    </script>
+  </body>
+</html>

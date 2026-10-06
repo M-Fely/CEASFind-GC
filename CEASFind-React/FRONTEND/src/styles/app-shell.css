@@ -1,0 +1,1035 @@
+/* Sidebar + top bar layout shared by every signed-in page, plus the cards
+   those pages render (ported from homepage/saved/history/review/notif/pending/pfp.html). */
+
+.app-shell {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* ── Sidebar ── */
+.app-shell .side-bar {
+  width: 250px;
+  height: 100vh;
+  background-color: var(--night);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 100;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.app-shell .sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px 10px 10px 20px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.app-shell .app-logo {
+  width: 25px;
+  height: auto;
+  transform: scaleX(-1);
+  flex-shrink: 0;
+}
+
+.app-shell .sidebar-header h4 {
+  font-size: 15px;
+  font-family: "Poetsen One", sans-serif;
+  color: var(--white);
+  margin-left: 15px;
+  white-space: nowrap;
+}
+
+.app-shell .nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.app-shell .nav-item {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 8px;
+  transition: 0.2s;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.app-shell .nav-item:hover,
+.app-shell .nav-item.active {
+  background-color: var(--white);
+  color: var(--night);
+}
+
+.app-shell .nav-item .material-symbols-outlined {
+  min-width: 30px;
+  font-size: 18px;
+}
+
+.app-shell .nav-divider {
+  opacity: 0.1;
+  margin: 10px 20px;
+  width: 190px;
+}
+
+.app-shell .category-label {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 15px;
+  margin: 5px 0 10px 20px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.app-shell .account {
+  padding: 15px 10px 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.app-shell .account-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.app-shell .account-display-name {
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-shell .account-name:hover .account-display-name {
+  text-decoration: underline;
+}
+
+.app-shell .admin-badge {
+  font-size: 9px;
+  background: #ffd700;
+  color: #000;
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.app-shell .logout-btn {
+  background: none;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+}
+.app-shell .logout-btn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* ── Content + top bar ── */
+.app-shell .content-area {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-shell .top-bar {
+  padding: 20px 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.app-shell .page-title {
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 100;
+  color: var(--night);
+  font-size: 23px;
+  padding-left: 10px;
+}
+
+.app-shell .search-report-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.app-shell .search-main {
+  width: 250px;
+  height: 35px;
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--bg-white);
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.app-shell .search-main input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  color: var(--night);
+}
+
+.app-shell .search-main input::placeholder {
+  color: var(--night);
+}
+
+.app-shell .search-icon-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+}
+
+.app-shell .search-icon {
+  color: var(--night);
+  font-size: 20px;
+}
+
+.app-shell .report-wrapper {
+  text-decoration: none;
+  margin-right: 16px;
+}
+
+.app-shell .report-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--night);
+  border: 1px solid var(--bg-white);
+  width: 38px;
+  height: 35px;
+  padding: 0 7px;
+  border-radius: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.3s;
+}
+
+.app-shell .report-text {
+  font-weight: 700;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.app-shell .report-item:hover {
+  width: 120px;
+  background: var(--night);
+  color: var(--white);
+}
+
+.app-shell .report-item:hover .report-text {
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+/* ── Filter bar (home) ── */
+.app-shell .filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px 10px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+
+.app-shell .category-chip {
+  background: var(--white);
+  border: 1px solid var(--bg-white);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--night);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.app-shell .category-chip:hover,
+.app-shell .category-chip.active {
+  background: var(--night);
+  color: var(--white);
+  border-color: var(--night);
+}
+
+.app-shell .search-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--baby-blue);
+  color: var(--night);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Scroll area: main column + right panel ── */
+.app-shell .main-scroll-view {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+  gap: 10px;
+  padding: 10px 20px;
+  scrollbar-gutter: stable;
+}
+
+.app-shell .main-scroll-view::-webkit-scrollbar {
+  width: 6px;
+}
+.app-shell .main-scroll-view::-webkit-scrollbar-thumb {
+  background: var(--night);
+  border-radius: 10px;
+}
+
+.app-shell .wave-welcome {
+  grid-column: 1 / -1;
+  height: 250px;
+  background: var(--night);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.app-shell .welcome-text {
+  font-family: "Poetsen One", sans-serif;
+  color: var(--white);
+  font-size: clamp(40px, 6vw, 75px);
+  font-weight: 400;
+  text-align: center;
+  z-index: 10;
+  position: relative;
+}
+
+.app-shell .wave-welcome .wave-container {
+  position: absolute;
+  inset: auto 0 0 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.app-shell .wave-welcome .wave-container img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+.app-shell .feed-container,
+.app-shell .card-list {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-shell .card-list {
+  gap: 12px;
+}
+
+.app-shell .empty-msg {
+  text-align: center;
+  color: var(--onyx);
+  margin-top: 120px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ── Right panel ── */
+.app-shell .right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+}
+
+.app-shell .preview-card,
+.app-shell .photo-gallery-container {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--bg-white);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.app-shell .preview-card.clickable {
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.app-shell .preview-card.clickable:hover {
+  border-color: var(--baby-blue);
+}
+
+.app-shell .preview-card h5,
+.app-shell .photo-gallery-container h5 {
+  color: var(--night);
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.app-shell .preview-empty,
+.app-shell .preview-line {
+  font-size: 13px;
+  color: var(--onyx);
+  line-height: 1.5;
+}
+
+.app-shell .preview-notif {
+  font-size: 13px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--onyx);
+  padding-left: 8px;
+}
+.app-shell .preview-notif small {
+  color: #777;
+  font-size: 12px;
+}
+
+/* ── Post card (home + profile) ── */
+.app-shell .post-card {
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--bg-white);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.app-shell .highlighted .post-card {
+  outline: 2px solid var(--night);
+  outline-offset: 1px;
+}
+
+.app-shell .post-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.app-shell .post-card-head-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.app-shell .post-author {
+  color: var(--onyx);
+  text-decoration: none;
+}
+.app-shell .post-author:hover {
+  text-decoration: underline;
+}
+
+.app-shell .post-meta {
+  font-size: 13px;
+}
+
+.app-shell .post-body {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.app-shell .post-description {
+  margin-top: 4px;
+  white-space: pre-line;
+}
+
+.app-shell .post-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+  object-fit: cover;
+  max-height: 300px;
+  display: block;
+}
+
+.app-shell .status-badge {
+  color: white;
+  padding: 6px 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.app-shell .post-actions {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  margin-top: 10px;
+}
+
+.app-shell .action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--night);
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+  padding: 0 10px;
+}
+
+.app-shell .action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.app-shell .action-btn.lost-action {
+  color: var(--lost-accent);
+  font-weight: 700;
+}
+
+.app-shell .delete-post-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--danger);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.app-shell .delete-post-btn:hover {
+  opacity: 0.7;
+}
+.app-shell .delete-post-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+/* ── Shared small pieces ── */
+.app-shell .item-thumb {
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.app-shell .item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.app-shell .item-thumb .material-symbols-outlined {
+  font-size: 22px;
+  color: #ccc;
+}
+
+.app-shell .small-btn {
+  background: var(--night);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  width: 100%;
+}
+.app-shell .small-btn.danger {
+  background: var(--danger);
+}
+.app-shell .small-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── History ── */
+.app-shell .history-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid var(--bg-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.app-shell .history-info {
+  flex-grow: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.app-shell .history-info > strong {
+  color: var(--night);
+  font-size: 15px;
+}
+.app-shell .history-info p {
+  font-size: 13px;
+  color: #333;
+}
+.app-shell .history-date {
+  color: #8e8e8e !important;
+  font-size: 12px !important;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.app-shell .history-date .material-symbols-outlined {
+  font-size: 13px;
+}
+
+.app-shell .history-actions,
+.app-shell .review-actions,
+.app-shell .pending-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+  min-width: 130px;
+}
+
+/* ── Review ── */
+.app-shell .review-post-card,
+.app-shell .pending-post-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid var(--bg-white);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.app-shell .review-info,
+.app-shell .pending-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+.app-shell .review-info > strong {
+  color: var(--night);
+  font-size: 16px;
+}
+.app-shell .review-sub {
+  font-size: 13px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.app-shell .claim-box {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  border: 1px solid var(--bg-white);
+}
+.app-shell .claim-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--night);
+}
+.app-shell .claim-contact {
+  font-size: 12px;
+  color: #666;
+}
+.app-shell .claim-proof {
+  font-size: 13px;
+  color: #444;
+  margin-top: 6px;
+  white-space: pre-line;
+}
+.app-shell .claim-none {
+  font-size: 13px;
+  color: #999;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ── Pending ── */
+.app-shell .pending-title {
+  color: var(--night);
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.app-shell .pending-title span {
+  color: var(--onyx);
+}
+.app-shell .pending-proof {
+  font-size: 13px;
+  color: #444;
+  font-style: italic;
+}
+.app-shell .pending-meta {
+  font-size: 12px;
+  color: #8e8e8e;
+  margin-top: 4px;
+}
+.app-shell .contact-btn {
+  text-decoration: none;
+  background: var(--bg-white);
+  color: var(--night);
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.app-shell .contact-btn .material-symbols-outlined {
+  font-size: 14px;
+}
+
+/* ── Notifications ── */
+.app-shell .notif-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--bg-white);
+  border-radius: 10px;
+  background-color: var(--white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.app-shell .notif-content {
+  font-size: 13px;
+  color: var(--onyx);
+  line-height: 1.5;
+  min-width: 0;
+}
+.app-shell .notif-username {
+  font-weight: bold;
+  color: var(--night);
+  margin-right: 5px;
+}
+.app-shell .notif-contact {
+  color: #555;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.app-shell .notif-time {
+  color: #8e8e8e;
+  font-size: 12px;
+}
+.app-shell .notif-bell {
+  font-size: 18px;
+}
+
+/* ── Saved ── */
+.app-shell .saved-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--bg-white);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.app-shell .saved-card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+.app-shell .saved-card-body {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.app-shell .saved-card-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  background: var(--bg-white);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.app-shell .saved-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.app-shell .saved-card-thumb .material-symbols-outlined {
+  color: #ccc;
+  font-size: 22px;
+}
+.app-shell .saved-card-info {
+  flex: 1;
+  min-width: 0;
+}
+.app-shell .saved-card-info .item-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--night);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.app-shell .saved-card-info .item-meta {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+.app-shell .saved-card-info .item-reporter {
+  font-size: 12px;
+  color: #555;
+  margin-top: 3px;
+}
+.app-shell .saved-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.app-shell .status-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.app-shell .card-btn-row {
+  display: flex;
+  gap: 6px;
+}
+.app-shell .btn-view {
+  background: var(--night);
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 12px;
+}
+.app-shell .btn-view:hover {
+  opacity: 0.85;
+}
+.app-shell .btn-unsave {
+  background: var(--bg-white);
+  color: var(--danger);
+  border: none;
+  padding: 6px 8px;
+  border-radius: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.app-shell .btn-unsave:hover {
+  opacity: 0.7;
+}
+.app-shell .btn-unsave .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.app-shell .skeleton {
+  height: 90px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Profile ── */
+.app-shell .profile-header-container {
+  grid-column: 1 / -1;
+}
+
+.app-shell .profile-header-card {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid var(--bg-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.app-shell .profile-info h2 {
+  color: var(--night);
+  font-size: 20px;
+}
+.app-shell .profile-info p {
+  color: var(--night);
+  font-size: 15px;
+}
+
+.app-shell .profile-stats-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.app-shell .post-count-badge {
+  background: var(--bg-white);
+  padding: 10px 25px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  color: var(--night);
+  font-size: 13px;
+}
+.app-shell .post-count-label {
+  font-weight: normal;
+}
+
+.app-shell .share-profile-btn {
+  background: var(--night);
+  color: var(--white);
+  border: 1px solid var(--bg-white);
+  padding: 10px 20px 10px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 600;
+  font-size: 13px;
+}
+.app-shell .share-profile-btn:hover {
+  background: var(--bg-white);
+  color: var(--night);
+}
+
+.app-shell .photo-gallery {
+  column-count: 3;
+  column-gap: 3px;
+}
+.app-shell .gallery-img {
+  width: 100%;
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.app-shell .gallery-img:hover {
+  transform: scale(1.05);
+}
+
+/* ── Narrow screens: icon-only sidebar, single column ── */
+@media (max-width: 1000px) {
+  .app-shell .main-scroll-view {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .app-shell .right-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 700px) {
+  .app-shell .side-bar {
+    width: 64px;
+  }
+  .app-shell .sidebar-header h4,
+  .app-shell .nav-text,
+  .app-shell .category-label,
+  .app-shell .nav-divider,
+  .app-shell .account-name {
+    display: none;
+  }
+  .app-shell .nav-item {
+    padding: 8px;
+    justify-content: center;
+  }
+  .app-shell .sidebar-header {
+    padding: 10px;
+    justify-content: center;
+  }
+  .app-shell .account {
+    justify-content: center;
+  }
+  .app-shell .search-main {
+    width: 100%;
+  }
+  .app-shell .search-report-group {
+    margin-left: 0;
+    width: 100%;
+  }
+  .app-shell .history-card,
+  .app-shell .review-post-card,
+  .app-shell .pending-post-card {
+    flex-wrap: wrap;
+  }
+}

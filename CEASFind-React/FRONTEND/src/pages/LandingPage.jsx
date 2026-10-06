@@ -1,4 +1,5 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/landing-page.css";
 
 const characterLayers = [
   ["under-shirt", "homepage (under shirt).png"],
@@ -28,7 +29,7 @@ const waveLayers = [1, 2, 3, 4, 5, 6];
 
 export default function LandingPage() {
   return (
-    <>
+    <div className="landing">
       <header className="header">
         <div className="brand">
           <img
@@ -38,9 +39,9 @@ export default function LandingPage() {
           />
           <span className="brand-name">CEAS FIND</span>
         </div>
-        <a href="/auth.html" className="header-cta">
+        <Link to="/auth" className="header-cta">
           Sign In
-        </a>
+        </Link>
       </header>
 
       <div className="wave-container" aria-hidden="true">
@@ -68,9 +69,9 @@ export default function LandingPage() {
             and recovering found property within Gordon College.
           </p>
           <div className="cta-group">
-            <a href="/auth.html" className="btn-primary">
+            <Link to="/home" className="btn-primary">
               Go to Feed
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -85,6 +86,6 @@ export default function LandingPage() {
           ))}
         </div>
       </main>
-    </>
+    </div>
   );
 }

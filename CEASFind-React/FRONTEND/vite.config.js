@@ -2,14 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 const frontendDir = path.dirname(fileURLToPath(import.meta.url));
 const elementsDir = path.resolve(frontendDir, "../elements");
-const htmlInputs = Object.fromEntries(
-  fs.readdirSync(frontendDir)
-    .filter((filename) => filename.endsWith(".html"))
-    .map((filename) => [filename.slice(0, -5), path.resolve(frontendDir, filename)]),
-);
 
 function existingElements() {
   return {
@@ -63,20 +59,15 @@ function existingElements() {
 }
 
 export default defineConfig({
-  plugins: [existingElements()],
-  build: {
-    rollupOptions: {
-      input: htmlInputs,
-    },
-  },
+  plugins: [react(), existingElements()],
   resolve: {
     preserveSymlinks: true,
   },
   server: {
     host: "localhost",
-  },
-  optimizeDeps: {
-    noDiscovery: true,
-    include: ["react", "react-dom/client"],
+    // The Express backend (BACKEND/server.js) serves the API under /api.
+    proxy: {
+      "/api": "http://localhost:3000",
+    },
   },
 });

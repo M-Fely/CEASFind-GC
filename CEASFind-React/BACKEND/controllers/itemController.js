@@ -5,17 +5,20 @@ import nodemailer from "nodemailer";
 
 export async function reportItem(inputOne, inputTwo) {
   try {
-    const fileToString = inputTwo.buffer.toString("base64");
-    const prefix = `data:${inputTwo.mimetype};base64,`;
+    // Photos are optional for lost-item posts.
+    const img_url = inputTwo
+      ? `data:${inputTwo.mimetype};base64,${inputTwo.buffer.toString("base64")}`
+      : "";
 
     const docRef = await db.collection("items").add({
       ...inputOne,
-      img_url: prefix + fileToString,
+      img_url,
       createdAt: FieldValue.serverTimestamp(),
-      status: "unclaimed",
+      // Lost-item posts start as "Searching"; found items as "unclaimed".
+      status: inputOne.status || "unclaimed",
     });
 
-    return docRef;
+    return docRef.id;
   } catch (error) {
     console.error("Database Error:", error.message);
     throw error;

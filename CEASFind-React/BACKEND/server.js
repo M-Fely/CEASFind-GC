@@ -24,22 +24,26 @@ app.use(cors({
     "http://127.0.0.1:5500",
     "http://localhost:5500",
     "http://localhost:3000",
+    "http://localhost:5173",
   ],
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve the frontend folder statically
-app.use(express.static(path.join(__dirname, "../FRONTEND")));
+// Serve the built React app (run `npm run build` in ../FRONTEND first)
+const distDir = path.join(__dirname, "../FRONTEND/dist");
+app.use(express.static(distDir));
 app.use("/elements", express.static(path.join(__dirname, "../elements")));
 
-// ── Routes ────────────────────────────────────────────────────────────────────
-app.use("/item", itemRouter);
-app.use("/saved", savedRouter);
-app.use("/claims", claimRouter);
+// ── API Routes ────────────────────────────────────────────────────────────────
+// Mounted under /api so they don't collide with the React app's page routes
+// (e.g. the /saved page vs. the /saved API).
+app.use("/api/item", itemRouter);
+app.use("/api/saved", savedRouter);
+app.use("/api/claims", claimRouter);
 
-// ── GET /notifications?uid=xxx ────────────────────────────────────────────────
-app.get("/notifications", async (req, res) => {
+// ── GET /api/notifications?uid=xxx ────────────────────────────────────────────
+app.get("/api/notifications", async (req, res) => {
   try {
     const { uid } = req.query;
     if (!uid) return res.status(400).send("uid is required.");
@@ -51,9 +55,12 @@ app.get("/notifications", async (req, res) => {
   }
 });
 
-// Fallback: serve homepage for any unmatched GET
+// Unknown API paths are real 404s, not the React app
+app.use("/api", (req, res) => res.status(404).send("Not found."));
+
+// Fallback: let React Router handle every other GET
 app.get("*splat", (req, res) => {
-  res.sendFile(path.join(__dirname, "../FRONTEND/homepage.html"));
+  res.sendFile(path.join(distDir, "index.html"));
 });
 
 console.log("Elements path:", path.join(__dirname, "../elements"));

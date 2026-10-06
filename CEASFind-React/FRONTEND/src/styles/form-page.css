@@ -1,0 +1,498 @@
+/* Full-screen card on the navy wave background: posting page + claim/return pages
+   (ported from posting-page.html, proof-page.html and return-page.html). */
+
+.form-page {
+  --accent: var(--night);
+  position: relative;
+  background-color: var(--night);
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+}
+
+.form-page .nav-header {
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  z-index: 20;
+}
+
+.form-page .app-logo {
+  width: 25px;
+  height: auto;
+  transform: scaleX(-1);
+}
+
+.form-page .nav-header h4 {
+  font-size: 15px;
+  font-family: "Poetsen One", sans-serif;
+  color: var(--white);
+  margin-left: 15px;
+  white-space: nowrap;
+}
+
+.form-page .wave-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.form-page .wave-container img {
+  position: absolute;
+  bottom: 0;
+  width: 110%;
+  max-width: none;
+  height: auto;
+}
+
+.form-page .form-card {
+  position: relative;
+  z-index: 10;
+  background-color: var(--white);
+  width: 95%;
+  max-width: 700px;
+  height: 90vh;
+  margin: auto auto 0 auto;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.form-page .card-body {
+  padding: 12px 45px 25px;
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.form-page .card-body::-webkit-scrollbar {
+  width: 6px;
+}
+.form-page .card-body::-webkit-scrollbar-thumb {
+  background: var(--bg-white);
+  border-radius: 10px;
+}
+
+.form-page .field-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #999;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.form-page .action-footer {
+  margin-top: auto;
+  padding-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.form-page .btn-cancel {
+  background-color: transparent;
+  color: var(--night);
+  padding: 10px 22px;
+  border: 1px solid var(--bg-white);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.form-page .btn-cancel:hover {
+  background-color: var(--night);
+  color: var(--white);
+}
+
+.form-page .btn-submit {
+  background-color: var(--accent);
+  color: var(--white);
+  padding: 12px 40px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-page .btn-submit:hover {
+  background-color: var(--white);
+  color: var(--accent);
+}
+.form-page .btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.form-page .btn-submit .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.form-page .state-panel {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 20px;
+  color: var(--night);
+}
+.form-page .state-panel h3 {
+  font-size: 22px;
+}
+.form-page .state-panel p {
+  font-size: 14px;
+  color: #666;
+  max-width: 340px;
+  line-height: 1.5;
+}
+.form-page .success-icon {
+  font-size: 56px;
+  color: #27ae60;
+}
+.form-page .error-icon {
+  font-size: 48px;
+  color: var(--accent);
+}
+.form-page .btn-solid {
+  background: var(--night);
+  color: white;
+  padding: 10px 28px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ── Posting page ── */
+.form-page.mode-lost {
+  --accent: var(--lost-accent);
+}
+
+.form-page .type-toggle-bar {
+  display: flex;
+  border-bottom: 1px solid var(--bg-white);
+  flex-shrink: 0;
+}
+
+.form-page .type-tab {
+  flex: 1;
+  padding: 14px 10px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #aaa;
+  border-bottom: 3px solid transparent;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+.form-page .type-tab .material-symbols-outlined {
+  font-size: 18px;
+}
+.form-page .type-tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.form-page .type-tab.active-found {
+  color: var(--night);
+  border-bottom-color: var(--night);
+}
+.form-page .type-tab.active-lost {
+  color: var(--lost-accent);
+  border-bottom-color: var(--lost-accent);
+}
+
+.form-page .card-header {
+  padding: 25px 45px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.form-page .user-header h2 {
+  color: var(--night);
+  font-size: 26px;
+  line-height: 1.1;
+}
+.form-page .user-header p {
+  color: var(--night);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.form-page .status-badge {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  background-color: var(--accent);
+  transition: background 0.3s;
+}
+
+.form-page .form-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.form-page .inputs-area textarea,
+.form-page .inputs-area select,
+.form-page .lost-location-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--bg-white);
+  padding: 8px 0 6px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  outline: none;
+  color: var(--onyx);
+}
+
+.form-page .inputs-area textarea {
+  resize: none;
+  overflow: hidden;
+  min-height: 35px;
+}
+
+.form-page .inputs-area select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-page .lost-location-input::placeholder {
+  color: #aaa;
+}
+
+.form-page .select-container {
+  position: relative;
+}
+.form-page .select-container::after {
+  content: "expand_more";
+  font-family: "Material Symbols Outlined";
+  position: absolute;
+  right: 0;
+  top: 8px;
+  color: var(--night);
+  pointer-events: none;
+}
+
+.form-page .hashtag-container {
+  position: relative;
+}
+.form-page .suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid var(--bg-white);
+  border-radius: 8px;
+  z-index: 100;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.form-page .sug-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.15s;
+}
+.form-page .sug-item:hover {
+  background-color: var(--bg-white);
+}
+
+.form-page .upload-box {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  background-color: var(--bg-white);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px dashed #ccc;
+  overflow: hidden;
+  margin-top: 10px;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.form-page .upload-box:hover {
+  background-color: #d8d8d8;
+}
+.form-page .upload-box img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+.form-page .upload-placeholder {
+  text-align: center;
+  color: var(--night);
+}
+.form-page .upload-placeholder .material-symbols-outlined {
+  font-size: 40px;
+}
+.form-page .upload-placeholder p {
+  font-size: 14px;
+  text-transform: lowercase;
+}
+.form-page .upload-optional-note {
+  font-size: 12px;
+  color: #888;
+  margin-top: 6px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── Claim / Return pages ── */
+.form-page.offer-claim {
+  --accent: var(--lost-accent);
+}
+.form-page.offer-return {
+  --accent: var(--night);
+}
+
+.form-page .offer-card {
+  max-width: 620px;
+}
+
+.form-page .offer-card .card-body {
+  padding: 28px 36px;
+}
+
+.form-page .item-banner {
+  background: var(--night);
+  color: white;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.form-page .item-banner img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #334e7e;
+  flex-shrink: 0;
+}
+.form-page .item-banner-info {
+  flex: 1;
+  min-width: 0;
+}
+.form-page .item-banner-info .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--baby-blue);
+  font-weight: 700;
+}
+.form-page .item-banner-info .name {
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.form-page .item-banner-info .meta {
+  font-size: 13px;
+  color: #aac0e8;
+  margin-top: 2px;
+}
+
+.form-page .offer-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.form-page .section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--night);
+  margin-bottom: 4px;
+}
+.form-page .section-sub {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 22px;
+  line-height: 1.45;
+}
+
+.form-page .field-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--bg-white);
+  padding: 8px 0 6px;
+  margin-bottom: 18px;
+  font-size: 15px;
+  outline: none;
+  color: var(--onyx);
+  transition: border-color 0.2s;
+}
+.form-page .field-input:focus {
+  border-bottom-color: var(--accent);
+}
+.form-page textarea.field-input {
+  resize: vertical;
+  min-height: 36px;
+}
+
+.form-page .hint-box {
+  background: #fff8f8;
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 22px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+.form-page .hint-box strong {
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .form-page .card-header,
+  .form-page .card-body,
+  .form-page .offer-card .card-body {
+    padding: 20px 25px;
+  }
+  .form-page .upload-box {
+    aspect-ratio: 4 / 3;
+  }
+  .form-page .nav-header {
+    top: 12px;
+    left: 20px;
+  }
+  .form-page .form-card {
+    height: 92vh;
+  }
+}

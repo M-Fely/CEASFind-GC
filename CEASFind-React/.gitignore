@@ -10,3 +10,5 @@ BACKEND/config/serviceAccountKey.json
 # OS junk
 .DS_Store
 Thumbs.db
+# Frontend build output
+FRONTEND/dist/
